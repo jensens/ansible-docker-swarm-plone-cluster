@@ -3,4 +3,4 @@
 - import_playbook: workers.yml
 - import_playbook: traefik/traefik.yml
 - import_playbook: portainer/portainer.yml
-- import_playbook: jenkins/jenkins.yml
+- import_playbook: plone/plone.yml

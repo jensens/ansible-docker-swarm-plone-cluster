@@ -1,1 +1,4 @@
 extra-vars.yml
+hosts
+.sentinel-*
+

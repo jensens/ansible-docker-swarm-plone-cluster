@@ -1,0 +1,6 @@
+[masters]
+main ansible_host=static.IPADDRESS-1.clients.your-server.de
+
+[workers]
+node-1 ansible_host=static.IPADDRESS-2.clients.your-server.de
+node-1 ansible_host=static.IPADDRESS-3.clients.your-server.de

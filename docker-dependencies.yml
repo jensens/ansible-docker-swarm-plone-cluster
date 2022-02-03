@@ -24,12 +24,6 @@
         state: present
         update_cache: true
 
-    - name: install Docker Compose
-      apt:
-        name: docker-compose
-        state: present
-        update_cache: true
-
     - name: Run whoami without become.
       command: whoami
       changed_when: false
