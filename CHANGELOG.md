@@ -5,8 +5,26 @@ All notable changes to this project will be documented in this file.
 The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/),
 and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
-## [Unreleased]
+## 1.0-dev0
 
+### Added
+
+- Plone
+
+### Removed
+
+- Jenkins
+
+## Fixed
+
+- Makefile and key-scan: Use sentinel file to indicate if it was run. Runs again if hosts file changes.
+- Traefik default middlewares extended and catch-all http -> https redirects.
+
+### Updated
+
+- Traefik is updated to version 2.5
+
+## PRE-FORK
 ### Added
 - A separate `extra-vars.yml` file containing all needed variables to avoid being asked them during installation.
 - A `Makefile` to easily run the needed commands.
