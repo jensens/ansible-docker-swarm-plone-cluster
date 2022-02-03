@@ -7,14 +7,17 @@
         state: latest
         update_cache: yes
 
-    - name: add Docker apt-key
-      apt_key:
-        url: https://download.docker.com/linux/ubuntu/gpg
+    - name: Install gpg for apt-key
+      apt:
+        name: gpg
         state: present
+
+    - name: Add Docker gpg key for apt
+      shell: curl -fsSL https://download.docker.com/linux/debian/gpg | sudo gpg --yes --dearmor -o /usr/share/keyrings/docker-archive-keyring.gpg
 
     - name: add Docker's APT repository
       apt_repository:
-        repo: deb [arch=amd64] https://download.docker.com/linux/ubuntu focal stable
+        repo: deb [arch=amd64 signed-by=/usr/share/keyrings/docker-archive-keyring.gpg] https://download.docker.com/linux/debian bullseye stable
         state: present
         filename: 'docker'
 
@@ -23,6 +26,14 @@
         name: docker-ce
         state: present
         update_cache: true
+
+    - name: Install Python3 pip
+      apt:
+        name: python3-pip
+        state: present
+
+    - name: Add Docker Python SDK
+      shell: pip install docker
 
     - name: Run whoami without become.
       command: whoami

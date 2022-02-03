@@ -2,7 +2,7 @@
 
 Create and deploy an n-node docker swarm cluster in minutes, with
 
-- [Traefik](https://containo.us/traefik/) as a reverse proxy and load balancer, including LentsEncrypt TLS certificates,
+- [Traefik](https://containo.us/traefik/) as a reverse proxy and load balancer, including LetsEncrypt TLS certificates,
 - [Portainer](https://www.portainer.io/) to manage containers and
 - [Plone](https://plone.org/) enterprise CMS (currently only in classic mode).
 
@@ -52,7 +52,7 @@ A couple of more minutes and you should have your cluster up and running.
 ## Initial Steps
 
 - Portainer initially shows a page at the root of the configured domain to set your administrator password. Go there immediatly and set it.
-- Plone is installed withy username `admin` and password `admin`. Got to the configured ZMI domain root, login and change it in `acl_users`.
+- Plone is installed withy username `admin` and password `admin`. Got to the configured ZMI domain root, login, enter `/manage`  and change it in `acl_users`.
 - You need to add a Plone site in the configured ZMI domain root. Login and do so. Give it the ID `Plone` (default), as Traefik is configured to this path.
 
 ## Acknowledgement
