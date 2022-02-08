@@ -6,12 +6,18 @@
         src: .
         dest: .
 
+    - name: Create a data directory if it does not exist
+      become: yes
+      ansible.builtin.file:
+        path: '{{ portainer_volume_path }}'
+        state: directory
+
     - name: Add portainer label for main node
       shell: 'docker node update --label-add portainer.portainer-data=true {{ main_node }}'
 
     - name: Deploy portainer
       shell: 'docker stack deploy -c portainer/docker-compose.yml portainer'
-      environment:
-        - DOMAIN: '{{ portainer_domain }}'
       args:
         chdir: $HOME
+      environment:
+        - PORTAINER_VOLUME_PATH: '{{ portainer_volume_path }}'

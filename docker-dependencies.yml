@@ -1,19 +1,38 @@
 - hosts: all
   become: yes
   tasks:
+
+    - name: Ensure en_US.UTF-8 locale exists
+      community.general.locale_gen:
+        name: en_US.UTF-8
+        state: present
+
+    - name: Ensure a locale exists
+      community.general.locale_gen:
+        name: de_AT.UTF-8
+        state: present
+
     - name: Upgrade all packages to the latest version
       apt:
         name: '*'
         state: latest
         update_cache: yes
 
-    - name: Install gpg for apt-key
+    - name: Install important dependencies
       apt:
-        name: gpg
+        pkg:
+        - gpg
+        - rsync
+        - python3-pip
         state: present
 
+    - name: Get Docker gpg key for apt
+      get_url:
+        url: https://download.docker.com/linux/debian/gpg
+        dest: /tmp/docker-gpg
+
     - name: Add Docker gpg key for apt
-      shell: curl -fsSL https://download.docker.com/linux/debian/gpg | sudo gpg --yes --dearmor -o /usr/share/keyrings/docker-archive-keyring.gpg
+      shell: gpg --yes --dearmor -o /usr/share/keyrings/docker-archive-keyring.gpg /tmp/docker-gpg
 
     - name: add Docker's APT repository
       apt_repository:
@@ -26,11 +45,6 @@
         name: docker-ce
         state: present
         update_cache: true
-
-    - name: Install Python3 pip
-      apt:
-        name: python3-pip
-        state: present
 
     - name: Add Docker Python SDK
       shell: pip install docker

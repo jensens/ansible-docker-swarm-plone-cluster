@@ -1,0 +1,10 @@
+main_node: webd01-00
+traefik_username: admin
+traefik_password: admin@akbildtraefik
+portainer_volume_path: /data/akbild-webportal/portainer
+plone_volumes_main:
+  - /data/akbild-webportal/latest/db
+  - /data/akbild-webportal/latest/var
+plone_volumes_node_1:
+  - /data/akbild-webportal/test/db
+  - /data/akbild-webportal/test/var

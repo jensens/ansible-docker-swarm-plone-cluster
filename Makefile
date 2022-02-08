@@ -9,4 +9,4 @@ key-scan: hosts
 
 .PHONY: swarm-cluster
 swarm-cluster: .sentinel-keyscan
-	ansible-playbook -i hosts swarm-bootstrap.yml -u ${ANSIBLE_SERVER_USER} -e @extra-vars.yml
+	ansible-playbook -i hosts swarm-bootstrap.yml -e @extra-vars-d01.yml

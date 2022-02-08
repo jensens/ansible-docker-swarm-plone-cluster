@@ -15,10 +15,13 @@
         hashed_password: '{{ hashed_password_raw.stdout_lines[0] }}'
 
     - name: Add traefik label for main node
-      shell: 'docker node update --label-add traefik-public.traefik-public-certificates=true {{ main_node }}'
+      shell: 'docker node update --label-add traefik-public=true {{ main_node }}'
+
+    - name: Add ingress label for main node
+      shell: 'docker node update --label-add ingress=true {{ main_node }}'
 
     - name: Create traefik network
-      shell: 'docker network create --driver=overlay traefik-public > create_traefik_network.txt'
+      shell: 'docker network create --driver=overlay traefik-public > create_traefik_network2.txt'
       args:
         chdir: $HOME
         creates: create_traefik_network.txt
@@ -28,7 +31,5 @@
       environment:
         - USERNAME: '{{ traefik_username }}'
         - HASHED_PASSWORD: '{{ hashed_password }}'
-        - EMAIL: '{{ traefik_email }}'
-        - DOMAIN: '{{ traefik_domain }}'
       args:
         chdir: $HOME

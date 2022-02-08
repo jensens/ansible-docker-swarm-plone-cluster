@@ -33,10 +33,10 @@ services:
         - traefik.enable=true
         - traefik.docker.network=traefik-public
         - traefik.constraint-label=traefik-public
-        - traefik.http.routers.portainer-https.rule=Host(`${DOMAIN?Variable not set}`)
-        - traefik.http.routers.portainer-https.entrypoints=https
-        - traefik.http.routers.portainer-https.tls=true
-        - traefik.http.routers.portainer-https.tls.certresolver=le
+        - traefik.http.routers.portainer.rule=Host(`webportal-latest.akbild.ac.at`) && PathPrefix(`/__portainer__`)
+        - traefik.http.middlewares.portainer-strip.stripprefix.prefixes=/__portainer__
+        - traefik.http.routers.portainer.entrypoints=http
+        - traefik.http.routers.portainer.middlewares=gzip,portainer-strip
         - traefik.http.services.portainer.loadbalancer.server.port=9000
 
 networks:
@@ -47,3 +47,7 @@ networks:
 
 volumes:
   portainer-data:
+    driver_opts:
+      type: none
+      device: ${PORTAINER_VOLUME_PATH?Unset}
+      o: bind

@@ -1,0 +1,23 @@
+- hosts: main
+  become: yes
+  gather_facts: false
+  tasks:
+    - name: Create Plone data directories
+      file:
+        path: "{{ item }}"
+        state: directory
+        mode: 755
+      loop: "{{ plone_volumes_main }}"
+
+- hosts: node-1
+  become: yes
+  gather_facts: false
+  tasks:
+    - name: Create Plone data directories
+      file:
+        path: "{{ item }}"
+        state: directory
+        mode: 755
+      loop: "{{ plone_volumes_node_1 }}"
+
+# ansible-playbook -i hosts prepare-plone.yml -e @extra-vars-d01.yml

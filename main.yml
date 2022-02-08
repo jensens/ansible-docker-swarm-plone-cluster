@@ -1,5 +1,4 @@
 - hosts: main
   tasks:
-    - name: Initialize the cluster using docker swarm
-      docker_swarm:
-        state: present
+    - name: Initialise swarm on mains
+      shell: 'docker swarm init --data-path-port=7789'
