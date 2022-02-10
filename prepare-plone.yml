@@ -9,6 +9,32 @@
         mode: 755
       loop: "{{ plone_volumes_main }}"
 
+    - name: Add storage labels for main node
+      shell: 'docker node update --label-add storage.{{ item }}=true {{ main_node }}'
+      loop: "{{ plone_storages_main }}"
+
+    - name: Add storage labels for node-1
+      shell: 'docker node update --label-add storage.{{ item }}=true {{ node_1 }}'
+      loop: "{{ plone_storages_node_1 }}"
+
+    - name: Add the user 'deployment'
+      ansible.builtin.user:
+        name: deployment
+        shell: /bin/bash
+        groups: docker
+        append: yes
+
+    - name: Create deployement's ssh directory
+      file:
+        path: "/home/deployment/.ssh"
+        state: directory
+        owner: deployment
+        group: deployment
+        mode: "700"
+
+    - name: copy pub key
+      shell: echo "{{ deployment_pub_key }}" >>/home/deployment/.ssh/authorized_keys
+
 - hosts: node-1
   become: yes
   gather_facts: false
@@ -20,4 +46,3 @@
         mode: 755
       loop: "{{ plone_volumes_node_1 }}"
 
-# ansible-playbook -i hosts prepare-plone.yml -e @extra-vars-d01.yml
