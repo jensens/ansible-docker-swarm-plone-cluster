@@ -1,4 +1,6 @@
 main_node: webp01-00
+node_1: webp01-01
+node_2: webp01-02
 traefik_username: admin
 traefik_password: admin@akbildtraefik
 portainer_volume_path: /data/akbild-webportal/portainer
@@ -6,3 +8,9 @@ plone_volumes_main:
   - /data/akbild-webportal/production/db
   - /data/akbild-webportal/production/var
 plone_volumes_node_1:
+  - /data/akbild-webportal/production/var
+plone_storages_main:
+  - production
+plone_storages_node_1:
+deployment_pub_key:
+  - "ssh-rsa AAAAB3NzaC1yc2EAAAADAQABAAABgQDMxsKNm5yfEzv7KPqIIc+bV1QSdddVhlRdvezW2k29N3qZsohGqXBxPF4G+z0JeYDkNJOSD+1lLxTmFlu4yjvma7AEaMaCtFWB9b2NV703T5glvFZl9RMwbwyEpVCjZtuEMp2/50iUca7UfCPrlGU8GQNKox+a9c8dbi2TWMecsaYmwMNvLcP2vQlYApakGKiBGMXSC3u4fsPGWetr07u0a4XhVzib9C4HfiI2TyJsTdFyNBIJ0FqxA5GwDZfL7L0s+c/kX9jtGMR5TyUr7W8VMYbNAUBy9QiKGHotMI9i8eS/g1cPLu/T9anMBRiNXgSCOun+TGxAamMKgI85S98C4xD68eW5eR0AIK4L0vfjkPApSFcm7Al9V9B4oOReJdth6a8KJa5kf/YbF5Ii+8442kHO2xl3Vm5s3mu+DzHOt9wyK9DkzrKFvWX/wd7n4C+L4kcKB5L16vpLa0g7fRuA3t6oWIvsUhbt5xwjuSAnbdLYG3uZ7gbjwxad/j4Tips= CI Deployment"
