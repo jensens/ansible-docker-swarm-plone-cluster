@@ -15,7 +15,7 @@
 
     - name: Add storage labels for node-1
       shell: 'docker node update --label-add storage.{{ item }}=true {{ node_1 }}'
-      loop: "{{ plone_storages_node_1 }}"
+      loop: "{{ plone_storages_node_1 if plone_storages_node_1 is iterable else [] }}"
 
     - name: Add the user 'deployment'
       ansible.builtin.user:
@@ -44,5 +44,5 @@
         path: "{{ item }}"
         state: directory
         mode: 755
-      loop: "{{ plone_volumes_node_1 }}"
+      loop: "{{ plone_volumes_node_1 if plone_volumes_node_1 is iterable else []}}"
 

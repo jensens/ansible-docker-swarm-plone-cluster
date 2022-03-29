@@ -3,12 +3,12 @@ ANSIBLE_SERVER_USER=root
 
 .DEFAULT_GOAL := swarm-cluster
 
-HOSTFILE?=hosts.test
+HOSTGROUP?=d01
 
 key-scan: hosts
-	ansible-playbook -i ${HOSTFILE} ssh-keyscan.yml
+	ansible-playbook -i hosts.${HOSTGROUP} ssh-keyscan.yml
 	touch .sentinel-keyscan
 
 .PHONY: swarm-cluster
 swarm-cluster: .sentinel-keyscan
-	ansible-playbook -i ${HOSTFILE} swarm-bootstrap.yml -e @extra-vars-d01.yml
+	ansible-playbook -i hosts.${HOSTGROUP} swarm-bootstrap.yml -e @extra-vars-${HOSTGROUP}.yml

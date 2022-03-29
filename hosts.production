@@ -1,6 +1,0 @@
-[masters]
-main ansible_host=ak.portal.production.0
-
-[workers]
-node-1 ansible_host=ak.portal.production.1
-node-2 ansible_host=ak.portal.production.2
